@@ -211,4 +211,63 @@ Para que as aplicações não seja acessadas por qualquer pessoa, é preciso que
 
 ## Deploy no Heroku
 
-https://eli-gestao-clientes.herokuapp.com/ | https://git.heroku.com/eli-gestao-clientes.git
+[Step to Step](https://github.com/Gpzim98/django-heroku)
+
+[Deploy](https://eli-gestao-clientes.herokuapp.com/)
+
+[GitHeroku](https://git.heroku.com/eli-gestao-clientes.git)
+
+## BootstrapCDN
+
+1. Em **gestao_clientes/templates**.
+
+    **Herança de templates**
+    Criando um arquivo como base para os templates
+
+    ```html
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <title>{%block title%}{%endblock%}</title>
+    </head>
+    <body>
+        {%block main%}
+        {%endblock%}
+    </body>
+    </html>
+
+    ```
+    Basta agora importar todos os blocos criados para os demais templates, que eles rederizarão o bootstrap.
+
+2. Nos demais html's, usa-se o **extends**. Em **home/templates/home.html**. Para custumizar as demais tags do html, basta usar as classes do bootstrap.
+
+    ```html
+    {%extends 'base.html'%}
+
+    {%block title%}Seja Bem Vindo{%endblock%}
+
+    {%block main%}
+    <h1>Seja bem vindo</h1>
+
+        {% if user.is_authenticated %}
+            <p>Ola {{user.username}}</p>
+            <a href="{% url 'logout' %}">Sair</a>
+        {% else %}
+            <a href="{% url 'login' %}">Entrar</a>
+        {% endif %}
+
+    {%endblock%}
+
+    ```
+
+## Personalizando formulários
+
+[Django Bootstrap Form](https://django-bootstrap-form.readthedocs.io/en/latest/)
+
+## Ajustes de grid
+
+[Grid](https://getbootstrap.com/docs/4.1/layout/grid/)
